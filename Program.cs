@@ -31,8 +31,8 @@ namespace sha256Generate
             hash34Bytes = SHA256.Create().ComputeHash(hash34Bytes);
 
             //coverts the hash into a hexhash
-            string hexHash12 = BitConverter.ToString(hash12Bytes).Replace("-","");
-            string hexHash34 = BitConverter.ToString(hash34Bytes).Replace("-", "");
+            string hexHash12 = BitConverter.ToString(hash12Bytes).Replace("-","").ToLowerInvariant();
+            string hexHash34 = BitConverter.ToString(hash34Bytes).Replace("-", "").ToLowerInvariant();
 
             //the combined string of them
             string strTotal = hexHash12 + hexHash34;
@@ -45,7 +45,7 @@ namespace sha256Generate
             hashTotalBytes = SHA256.Create().ComputeHash(hashTotalBytes);
 
             //convert the hash into a string
-            string hexHashTotal = BitConverter.ToString(hash34Bytes).Replace("-", "").ToLowerInvariant();
+            string hexHashTotal = BitConverter.ToString(hashTotalBytes).Replace("-", "").ToLowerInvariant();
 
             //printing the hash
             Console.WriteLine(hexHashTotal);
