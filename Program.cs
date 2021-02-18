@@ -24,15 +24,19 @@ namespace sha256Generate
 
             //creates the hashed bytes, must be done twice per request
             byte[] hash12Bytes = SHA256.Create().ComputeHash(str12Bytes);
-            hash12Bytes = SHA256.Create().ComputeHash(hash12Bytes);
+            string hexHash12 = BitConverter.ToString(hash12Bytes).Replace("-", "").ToLowerInvariant();
+            str12Bytes = Encoding.UTF8.GetBytes(hexHash12);
+            hash12Bytes = SHA256.Create().ComputeHash(str12Bytes);
 
             //do the same for 34
             byte[] hash34Bytes = SHA256.Create().ComputeHash(str34Bytes);
-            hash34Bytes = SHA256.Create().ComputeHash(hash34Bytes);
+            string hexHash34 = BitConverter.ToString(hash34Bytes).Replace("-", "").ToLowerInvariant();
+            str34Bytes = Encoding.UTF8.GetBytes(hexHash34);
+            hash12Bytes = SHA256.Create().ComputeHash(str34Bytes);
 
             //coverts the hash into a hexhash
-            string hexHash12 = BitConverter.ToString(hash12Bytes).Replace("-","").ToLowerInvariant();
-            string hexHash34 = BitConverter.ToString(hash34Bytes).Replace("-", "").ToLowerInvariant();
+            hexHash12 = BitConverter.ToString(hash12Bytes).Replace("-","").ToLowerInvariant();
+            hexHash34 = BitConverter.ToString(hash34Bytes).Replace("-", "").ToLowerInvariant();
 
             //the combined string of them
             string strTotal = hexHash12 + hexHash34;
@@ -42,10 +46,12 @@ namespace sha256Generate
 
             //hash the sequence twice
             byte[] hashTotalBytes = SHA256.Create().ComputeHash(strTotalBytes);
+            string hexHashTotal = BitConverter.ToString(hashTotalBytes).Replace("-", "").ToLowerInvariant();
+            hashTotalBytes = Encoding.UTF8.GetBytes(hexHashTotal);
             hashTotalBytes = SHA256.Create().ComputeHash(hashTotalBytes);
 
             //convert the hash into a string
-            string hexHashTotal = BitConverter.ToString(hashTotalBytes).Replace("-", "").ToLowerInvariant();
+            hexHashTotal = BitConverter.ToString(hashTotalBytes).Replace("-", "").ToLowerInvariant();
 
             //printing the hash
             Console.WriteLine(hexHashTotal);
