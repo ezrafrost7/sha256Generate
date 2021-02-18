@@ -32,7 +32,7 @@ namespace sha256Generate
             byte[] hash34Bytes = SHA256.Create().ComputeHash(str34Bytes);
             string hexHash34 = BitConverter.ToString(hash34Bytes).Replace("-", "").ToLowerInvariant();
             str34Bytes = Encoding.UTF8.GetBytes(hexHash34);
-            hash12Bytes = SHA256.Create().ComputeHash(str34Bytes);
+            hash34Bytes = SHA256.Create().ComputeHash(str34Bytes);
 
             //coverts the hash into a hexhash
             hexHash12 = BitConverter.ToString(hash12Bytes).Replace("-","").ToLowerInvariant();
